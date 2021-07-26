@@ -21,8 +21,8 @@ RUN docker-php-ext-configure \
     bcmath \
     exif
 
-COPY /opt/container/php-fpm/opcache.ini $PHP_INI_DIR/conf.d/
-COPY /opt/container/php-fpm/php.ini $PHP_INI_DIR/conf.d/
+COPY /8.0/opcache.ini $PHP_INI_DIR/conf.d/
+COPY /8.0/php.ini $PHP_INI_DIR/conf.d/
 
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
