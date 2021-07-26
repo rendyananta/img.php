@@ -1,30 +1,7 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-fpm-alpine AS base
 
-# Add Build Dependencies
-RUN apk update && apk add --no-cache --virtual .build-deps  \
-    zlib-dev \
-    libjpeg-turbo-dev \
-    libpng-dev \
-    libxml2-dev \
-    bzip2-dev \
-    postgresql-dev \ 
-    zip \
-    libzip-dev 
+RUN apk add --update zlib-dev freetype-dev libpng-dev jpeg-dev libjpeg-turbo-dev postgresql-dev libpng-dev libxml2-dev libzip-dev bzip2-dev shadow $PHPIZE_DEPS
 
-# Add Production Dependencies
-RUN apk add --update --no-cache \
-    shadow \
-    jpegoptim \
-    pngquant \
-    optipng \
-    supervisor \
-    nano \
-    icu-dev \
-    freetype-dev \
-    nginx \
-    mysql-client
-
-# Configure & Install Extension
 RUN docker-php-ext-configure \
     opcache --enable-opcache &&\
     docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ && \
@@ -44,37 +21,9 @@ RUN docker-php-ext-configure \
     bcmath \
     exif
 
-COPY opcache.ini $PHP_INI_DIR/conf.d/
-COPY php.ini $PHP_INI_DIR/conf.d/
+COPY /opt/container/php-fpm/opcache.ini $PHP_INI_DIR/conf.d/
+COPY /opt/container/php-fpm/php.ini $PHP_INI_DIR/conf.d/
 
-# Configure nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Remove Build Dependencies
-RUN apk del -f .build-deps
-
-# Configure supervisord
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-RUN mkdir -p /var/www
-
-# change default uid
-RUN usermod -u 1000 www-data 
+RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
-
-RUN chown -R www-data:www-data /var/www && \
-  chown -R www-data:www-data /run && \
-  chown -R www-data:www-data /var/run && \
-  chown -R www-data:www-data /var/lib/nginx && \
-  chown -R www-data:www-data /var/log/nginx
-
-RUN touch /var/run/nginx.pid && \
-      chown -R www-data:www-data /var/run/nginx.pid
-
 USER www-data
-
-WORKDIR /var/www
-
-VOLUME [ "/var/www" ]
-
-CMD ["/usr/bin/supervisord"]
