@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine AS base
+FROM php:8.0-fpm-alpine
 
 RUN apk add --update zlib-dev freetype-dev libpng-dev jpeg-dev libjpeg-turbo-dev postgresql-dev libpng-dev libxml2-dev libzip-dev bzip2-dev shadow $PHPIZE_DEPS
 
@@ -21,9 +21,7 @@ RUN docker-php-ext-configure \
     bcmath \
     exif
 
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
 COPY /8.0/opcache.ini $PHP_INI_DIR/conf.d/
 COPY /8.0/php.ini $PHP_INI_DIR/conf.d/
-
-RUN usermod -u 1000 www-data
-RUN groupmod -g 1000 www-data
-USER www-data
