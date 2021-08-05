@@ -10,6 +10,7 @@ RUN docker-php-ext-configure \
     docker-php-ext-install \
     opcache \
     pdo_pgsql \
+    pdo_mysql \
     pgsql \
     pdo \
     sockets \
