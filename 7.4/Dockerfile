@@ -1,6 +1,6 @@
-FROM php:7.4-fpm-alpine
+FROM docker.io/php:7.4-fpm-alpine
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=docker.io/mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN install-php-extensions gd \
     opcache \
