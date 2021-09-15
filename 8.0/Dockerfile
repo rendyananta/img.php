@@ -13,6 +13,9 @@ RUN install-php-extensions gd \
     bz2 \
     pcntl \
     bcmath \
+    rdkafka \
+    sqlsrv \
+    pdo_sqlsrv \
     exif
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
