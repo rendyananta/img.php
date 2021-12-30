@@ -4,8 +4,14 @@ build-7.4:
 build-8.0:
 	docker build -t rendyananta/php-docker:8.0 -f 8.0/Dockerfile .
 
+build-8.1:
+	docker build -t rendyananta/php-docker:8.1 -f 8.1/Dockerfile .
+
 push-7.4:
 	docker push rendyananta/php-docker:7.4
 
 push-8.0:
 	docker push rendyananta/php-docker:8.0
+
+push-8.1:
+	docker push rendyananta/php-docker:8.1
