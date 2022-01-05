@@ -20,5 +20,7 @@ RUN install-php-extensions gd \
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+COPY --from=docker.io/composer:2 /usr/bin/composer /usr/bin/composer
+
 COPY /8.0/opcache.ini $PHP_INI_DIR/conf.d/
 COPY /8.0/php.ini $PHP_INI_DIR/conf.d/
