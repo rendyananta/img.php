@@ -1,3 +1,6 @@
+build-7.3:
+	docker build -t docker.io/rendyananta/php-docker:7.3 -f 7.3/Dockerfile .
+
 build-7.4:
 	docker build -t docker.io/rendyananta/php-docker:7.4 -f 7.4/Dockerfile .
 
