@@ -2,7 +2,7 @@ FROM docker.io/php:7.4-fpm-alpine
 
 COPY --from=docker.io/mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-RUN apk update && apk add --no-cache supervisor openssh nginx
+RUN apk update && apk add --no-cache supervisor nginx
 
 RUN install-php-extensions gd \
     opcache \
@@ -32,8 +32,6 @@ COPY /nginx/7.4/nginx.conf /etc/nginx/nginx.conf
 
 RUN touch /var/run/nginx.pid && \
         chown -R www-data:www-data /var/run/nginx.pid
-
-USER www-data
 
 EXPOSE 8000
 
