@@ -1,25 +1,25 @@
 # PHP Container Image.
-This container image are useful for deploying base web php applications.
+This minimal container image are useful for deploying base web php applications. The image size produced is relatively small than the other PHP container build application. While the official php image size is ~160MB compressed, in this image we can push into ~50MB, it is only around ~40% of the official image size. This image is suitable for storage efficiency improvement if you are deploying and versioning web application.  
 
 ## Introduction
 
 There are 2 variants provided in this repository. To know which variants are suitable for your use case
 you need to take a look a detail of these variants. If you are using Laravel, then all of these images are fully compatible.
 The images containing the php with already installed extensions below.
-- gd \
-- opcache \
-- pgsql \
-- zip \
-- redis \
-- pdo_pgsql \
-- pdo_mysql \
-- sockets \
-- bz2 \
-- pcntl \
-- bcmath \
-- rdkafka \
-- sqlsrv \
-- pdo_sqlsrv \
+- gd
+- opcache 
+- pgsql 
+- zip 
+- redis 
+- pdo_pgsql 
+- pdo_mysql 
+- sockets 
+- bz2 
+- pcntl 
+- bcmath 
+- rdkafka 
+- sqlsrv 
+- pdo_sqlsrv 
 - exif
 
 ### Vanilla image
