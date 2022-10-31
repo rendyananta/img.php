@@ -18,7 +18,8 @@ RUN install-php-extensions gd \
     rdkafka \
     sqlsrv \
     pdo_sqlsrv \
-    exif
+    exif \
+    openswoole
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
