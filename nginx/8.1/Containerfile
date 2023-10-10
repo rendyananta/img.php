@@ -19,7 +19,7 @@ RUN install-php-extensions gd \
     sqlsrv \
     pdo_sqlsrv \
     exif \
-    openswoole
+    swoole
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
